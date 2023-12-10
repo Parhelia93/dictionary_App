@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="uk-container">
+    <h2 class="form_cell">{{user_word.user_word}}:</h2>
+    <form action="{% url 'get_user_word_detail' user_word.pk %}" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            {% if field.errors %}
+                {{field.errors}}
+            {% endif %}
+            <div class="form_cell">
+                <div class="label_weight">{{field.label}}:</div>
+                {{field}}
+            </div>
+
+            <br>
+        {% endfor %}
+        <button type="submit">Edit</button>
+    </form>
+</div>
+{% endblock %}

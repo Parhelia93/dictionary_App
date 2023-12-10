@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="uk-container">
+    <table class="uk-table uk-table-hover uk-table-divider">
+    <thead>
+        <tr>
+            <th class="uk-width-1-6"></th>
+            <th>Group Name</th>
+            <th class="uk-width-1-6">Delete Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in user_group_list %}
+        <tr>
+            <td>#</td>
+            <td>{{item.name}}</td>
+            <td class="uk-table-link">
+                <a class="uk-link-reset" href="{{item.delete_user_group_url}}">#</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+{% endblock %}

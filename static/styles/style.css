@@ -1,0 +1,18 @@
+.form_cell{
+    margin-top: 2px;
+}
+
+.form_search{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.label_weight{
+    font-weight: 600;
+}
+
+.modal{
+    margin-left: 30%;
+    margin-right: 30%;
+    margin-top: 10%;
+}

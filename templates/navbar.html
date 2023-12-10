@@ -1,0 +1,47 @@
+<header class="header">
+    <nav class="uk-navbar-container">
+    <div class="uk-container">
+        <div uk-navbar>
+
+            <div class="uk-navbar-left">
+
+                <ul class="uk-navbar-nav">
+                    <li><a href="{% url 'get_user_profile' %}">Profile</a></li>
+                    <li>
+                        <a href="{% url 'dictionary_list' %}">Dictionary</a>
+                        <div class="uk-navbar-dropdown">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li><a href="{% url 'create_user_word' %}">Add word</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="{% url 'group_list' %}">Groups</a>
+                        <div class="uk-navbar-dropdown">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li><a href="{% url 'create_user_group' %}">Add group</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <div class="uk-navbar-right">
+
+                <ul class="uk-navbar-nav">
+                    {% if request.user.is_authenticated %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'register_user' %}">Register</a></li>
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    {% endif %}
+                </ul>
+
+            </div>
+
+        </div>
+    </div>
+    </nav>
+</header>

@@ -1,0 +1,80 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<div class="uk-container">
+    <div class="form_search">
+        <form action="{% url 'dictionary_list' %}" method="GET">
+
+            <ul class="uk-navbar-nav">
+            {% for field in form %}
+                <li>{{field.label}}</li>
+                <li>{{field}}</li>
+            {% endfor %}
+            <button type="submit">Search</button>
+            </ul>
+
+        </form>
+    </div>
+
+
+    <table class="uk-table uk-table-hover uk-table-divider">
+    <thead>
+        <tr>
+            <th>Word</th>
+            <th>Translate</th>
+            <th class="uk-width-1-6">Part Of Speach</th>
+            <th class="uk-width-1-6">Learning Status</th>
+            <th class="uk-width-1-6">Delete Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in user_dictionary_list %}
+        <tr>
+            <td class="uk-table-link">
+                <a class="uk-link-reset" href="{{item.get_absolute_url}}">{{item.user_word}}</a>
+            </td>
+            <td>{{item.translate}}</td>
+            <td>{{item.part_of_speach}}</td>
+            <td>{{item.status_of_learn}}</td>
+            <td class="uk-table-link">
+                <a class="uk-link-reset" href="{{item.delete_user_word_url}}">#</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+
+
+
+<div class="uk-position-bottom uk-overlay uk-overlay-default uk-text-center">
+    {% if user_dictionary_list.has_other_pages %}
+        <ul class="uk-pagination uk-flex-center" uk-margin>
+            {% if user_dictionary_list.has_previous %}
+                <li class="uk-active"><a href="?page={{ user_dictionary_list.previous_page_number }}{% for fil, fil_value in filters.items %}&{{fil}}={{fil_value}}{% endfor %}"><span uk-pagination-previous></span></a></li>
+            {% else %}
+                <li ><a href=""><span uk-pagination-previous></span></a></li>
+            {% endif %}
+
+
+            {% for i in user_dictionary_list.paginator.page_range %}
+                {% if user_dictionary_list.number == i %}
+                    <li class="uk-active"><span>{{ i }}</span></li>
+                {% elif i >= user_dictionary_list.number|add:-2 and i <= user_dictionary_list.number|add:2 %}
+                    <li><a href="?page={{ i }}{% for fil, fil_value in filters.items %}&{{fil}}={{fil_value}}{% endfor %}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+
+
+            {% if user_dictionary_list.has_next %}
+                <li class="uk-active"><a href="?page={{ user_dictionary_list.next_page_number }}{% for fil, fil_value in filters.items %}&{{fil}}={{fil_value}}{% endfor %}"><span uk-pagination-next></span></a></li>
+            {% else %}
+                <li ><a href=""><span uk-pagination-next></span></a></li>
+            {% endif %}
+
+
+        </ul>
+    {% endif %}
+</div>
+
+</div>
+{% endblock %}

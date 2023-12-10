@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="uk-container">
+    <form action="{% url 'create_user_word' %}" method="post">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+            {% for err in form.non_field_errors %}
+                <div class="uk-alert-danger" uk-alert>
+                    <a href class="uk-alert-close" uk-close></a>
+                    <p>{{err}}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
+        {% for field in form %}
+            {% if field.errors %}
+                {{field.errors}}
+            {% endif %}
+            <div class="form_cell">
+                <div class="label_weight">{{field.label}}:</div>
+                {{field}}
+            </div>
+
+            <br>
+        {% endfor %}
+        <button type="submit">Add</button>
+    </form>
+</div>
+{% endblock %}

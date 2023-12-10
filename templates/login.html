@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.26/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="uk-container">
+        <div class="modal">
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                    {% if field.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{field.errors}}
+                        </div>
+                    {% endif %}
+
+                    <div class="form_cell">
+                        <div class="label_weight">{{field.label}}:</div>
+                        {{field}}
+                    </div>
+
+                    <br>
+
+                {% endfor %}
+            <button type="submit" class="">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
